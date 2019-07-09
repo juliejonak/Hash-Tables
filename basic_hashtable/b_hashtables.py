@@ -1,5 +1,3 @@
-
-
 # '''
 # Basic hash table key/value pair
 # '''
@@ -15,7 +13,8 @@ class Pair:
 # '''
 class BasicHashTable:
     def __init__(self, capacity):
-        pass
+        self.capacity = capacity
+        self.elements = [None] * capacity
 
 
 # '''
@@ -24,6 +23,16 @@ class BasicHashTable:
 # '''
 def hash(string, max):
     pass
+
+def djb2(key):
+    hash = 5381
+    for i in key:
+        print(f'Hash: {hash}, Hash * 33: {hash * 33}, ord(i): {ord(i)}. SUM: {(hash*33)+ord(i)}')
+        # On each loop, it adds hash * 33 to the Unicode point of that letter in the string, and updates hash to that sum.
+        hash = (hash * 33) + ord(i)
+    return hash
+
+print(djb2('pih'))
 
 
 # '''
