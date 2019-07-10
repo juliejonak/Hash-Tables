@@ -17,7 +17,8 @@ class LinkedPair:
 # '''
 class HashTable:
     def __init__(self, capacity):
-        pass
+        self.capacity = capacity
+        self.storage = [None] * capacity
 
 
 # '''
@@ -36,7 +37,18 @@ def hash(string, max):
 # Hint: Used the LL to handle collisions
 # '''
 def hash_table_insert(hash_table, key, value):
-    pass
+    index = hash(key, hash_table.capacity)
+    linked_pair = LinkedPair(key, value)
+    stored_linked_pair = hash_table.storage[index]
+
+    if hash_table.storage[index] is not None:
+        if linked_pair.key != stored_linked_pair.key:
+            # What do we do? Create a new index to prevent overwriting?
+            # Expand the capacity to change index?
+            print(f"Warning: Index at {str(index)} is currently {hash_table.storage[index]}.")
+
+    else:
+        hash_table.storage[index] = linked_pair
 
 
 # '''
@@ -45,7 +57,16 @@ def hash_table_insert(hash_table, key, value):
 # If you try to remove a value that isn't there, print a warning.
 # '''
 def hash_table_remove(hash_table, key):
-    pass
+    index = hash(key, len(hash_table.storage))
+
+    if hash_table.storage[index] is not None:
+        if hash_table.storage[index].key != key:
+            print(f'Unable to remove item with key: {key}')
+    else:
+        # Need to change the self.next to the node pointing to this one?
+        removed_next = hash_table.storage[index].next
+        hash_table.storage[index] = None
+        # How do we find the index that pointed to this one?
 
 
 # '''
@@ -54,14 +75,29 @@ def hash_table_remove(hash_table, key):
 # Should return None if the key is not found.
 # '''
 def hash_table_retrieve(hash_table, key):
-    pass
+    index = hash(key, len(hash_table.storage))
+    
+    if hash_table.storage[index] is not None:
+        if hash_table.storage[index].key == key:
+            return hash_table.storage[index].value
+        print(f'Key {key} at that index does not match.')
+    
+    print(f'Unable to find value with key: {key}')
+    return None
 
 
 # '''
 # Fill this in
 # '''
 def hash_table_resize(hash_table):
-    pass
+    new_capacity = hash_table.capacity * 2
+    new_storage = [None] * new_capacity
+
+    for i in range(hash_table.storage):
+        new_storage[i] = hash_table.storage[i]
+    
+    hash_table.storage = new_storage
+    hash_table.capacity = new_capacity
 
 
 def Testing():

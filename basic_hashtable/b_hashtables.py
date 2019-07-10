@@ -48,7 +48,7 @@ def hash_table_insert(hash_table, key, value):
 
     if hash_table.storage[index] is not None:
         if pair.key != stored_pair.key:
-            print(f"Warning: Index at {str(index)} is currently ({hash_table.storage[index]}). It will now be overwritten.")
+            print(f"Warning: Index at {str(index)} is currently {hash_table.storage[index]}. It will now be overwritten.")
 
     # Now lets overwrite it
     hash_table.storage[index] = pair
